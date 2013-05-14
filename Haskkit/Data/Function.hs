@@ -1,7 +1,8 @@
 -- | Extensions for Data.Function libraries.
 module Haskkit.Data.Function (
       ($$),
-      is, isNot
+      is, (|=?),
+      isNot
     ) where
 
 infixr 0 $$
@@ -17,7 +18,10 @@ f $$ (a,b) = (f a, f b)
 is :: (a -> b) -> (b -> Bool) -> a -> Bool
 is = flip (.)
 
+-- | 'is' as an infix operator.
+(|=?) :: (a -> b) -> (b -> Bool) -> a -> Bool
+(|=?) = is
+
 -- | Combinator for predicates. @f `isNot` p@ is equivalent to @f `is` (not . p)@.
 isNot :: (a -> b) -> (b -> Bool) -> a -> Bool
 f `isNot` p = (not . p) . f
-
