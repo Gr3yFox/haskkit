@@ -1,6 +1,7 @@
 -- | Extensions for Control.Monad libraries.
 module Haskkit.Control.Monad (
-      lift2, lift3
+      lift2
+    , lift3
     , voidM
     ) where
 

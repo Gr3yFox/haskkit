@@ -1,6 +1,8 @@
 -- | Extensions for Data.Tuple libraries.
 module Haskkit.Data.Tuple (
-      fst3, snd3 , trd3
+      fst3
+    , snd3
+    , trd3
     ) where
 
 -- | Extract the first component of a triple.

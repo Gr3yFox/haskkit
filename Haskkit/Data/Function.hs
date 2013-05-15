@@ -1,8 +1,9 @@
 -- | Extensions for Data.Function libraries.
 module Haskkit.Data.Function (
-      ($$),
-      is, (|=?),
-      isNot
+      ($$)
+    ,  is
+    , (|=?)
+    , isNot
     ) where
 
 infixr 0 $$
