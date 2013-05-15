@@ -1,4 +1,4 @@
--- | A toy implementation of the Vigènere cipher.
+-- | A toy implementation of the Vigenere cipher.
 -- It encrypts/decrypts only ASCII letters (while keeping the letter-case), and
 -- ignores any other character. This holds both for the key and the text.
 module Haskkit.Math.Vigenere (
