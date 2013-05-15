@@ -1,5 +1,7 @@
 {-# LANGUAGE RankNTypes #-}
 
+-- | This module contains the Church encodings for booleans and natural numbers.
+-- See http://en.wikipedia.org/wiki/Church_encoding for reference.
 module Haskkit.Data.Church (
       CBool
     , ctrue
@@ -21,28 +23,42 @@ module Haskkit.Data.Church (
 
 import Data.Function (fix)
 
--- CBool: Church's booleans
 
+
+-- | Church's booleans.
 type CBool = forall a. a -> a -> a
 
-ctrue, cfalse :: CBool
+-- | Church's equivalent of 'True'.
+ctrue :: CBool
 ctrue  t f = t
+
+cfalse :: CBool
+-- | Church's equivalent of 'False'
 cfalse t f = f
 
+-- | Converts a 'Bool' into a 'CBool'.
 bool2church :: Bool -> CBool
 bool2church True = ctrue
 bool2church False = cfalse
 
+-- | Covnerts a 'CBool' into a 'Bool'
 church2bool :: CBool -> Bool
 church2bool c = c True False
 
-cand, cor :: CBool -> CBool -> CBool
+-- | Conjunction between 'CBool'.
+cand :: CBool -> CBool -> CBool
 cand l r = l r l
+
+-- | Disjunction between 'CBool'.
+cor :: CBool -> CBool -> CBool
 cor  l r = l l r
 
+-- | Negation of a 'CBool'.
 cnot :: CBool -> CBool
 cnot b = b cfalse ctrue
 
+--  | Conditional if-then-else for 'CBool'.
+-- @'cif' b thn els@ is equal to @thn@ when @b@ is 'ctrue', and equal to @els@ when @b@ is 'cfalse'.
 cif :: CBool -> a -> a -> a
 cif cb = cb
 
