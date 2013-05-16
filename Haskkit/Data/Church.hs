@@ -64,27 +64,35 @@ cif cb = cb
 
 -- CNat: Church's natural numbers
 
+-- | Church's natural numbers.
 type CNat = forall a. (a -> a) -> a -> a
 
+-- | Equivalent of 0.
 czero :: CNat
 czero _ x = x
 
+-- | Successor function.
 csucc :: CNat -> CNat
 csucc cn f x = f (cn f x)
 
+-- | Sum between 'CNat'.
 csum :: CNat -> CNat -> CNat
 csum cn1 cn2 f x = cn1 f (cn2 f x)
 
+-- | Conversion from Church's naturals to regular integers.
 church2nat :: CNat -> Int
 church2nat cn = cn (+1) 0
 
+-- | Conversion from (positive) integers to 'CNat'.
 nat2church :: Int -> CNat
 nat2church n | n <= 0    = czero
              | otherwise = csucc (nat2church (n - 1))
 
+-- | 'True' if and only if the given 'CNat' is equivalent to 0.
 ciszero :: CNat -> CBool
 ciszero cn = cn (const cfalse) ctrue
 
+-- | Factorial function for 'CNat'.
 fact :: Int -> Int
 fact = fix factfun
   where
